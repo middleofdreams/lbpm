@@ -332,7 +332,7 @@ class LBPM(QtGui.QMainWindow):
 		desc=unicode(desc).strip()
 		if not name.startswith("http://"): name="http://"+name
 
-		if name=="" or name in self.project.links:
+		if name=="http://" or name in self.project.links:
 			guihelpers.message("Error","No name specified or already exists",True)
 	
 		else:
@@ -457,7 +457,7 @@ class LBPM(QtGui.QMainWindow):
 			guihelpers.message("Error","No job selected",True)
 		else:
 			note=unicode(self.ui.jobNotes.currentText())
-			if note=="None": note="--"
+			if note==self.tr("None"): note="--"
 			item=self.ui.jobslist.takeTopLevelItem(n)
 			
 			self.project.jobs[unicode(item.text(0))][2]=note
