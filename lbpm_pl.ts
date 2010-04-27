@@ -4,338 +4,459 @@
 <context>
     <name>LBPM</name>
     <message>
-        <location filename="main.py" line="226"/>
+        <location filename="main.py" line="541"/>
         <source>Error</source>
-        <translation type="unfinished">Błąd</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="main.py" line="125"/>
+        <location filename="main.py" line="487"/>
         <source>None</source>
-        <translation type="unfinished">Brak</translation>
+        <translation>Brak</translation>
     </message>
     <message>
-        <location filename="main.py" line="165"/>
+        <location filename="main.py" line="168"/>
         <source>Documents: %i
 Notes: %i
 Links: %i
 Jobs: %i</source>
-        <translation type="unfinished">Dokumenty: %i
+        <translation>Dokumenty: %i
 Notatki: %i
 Odnośniki: %i
 Zadania: %i</translation>
     </message>
     <message>
-        <location filename="main.py" line="67"/>
+        <location filename="main.py" line="70"/>
         <source>New</source>
-        <translation type="unfinished">Nowe</translation>
+        <translation>Nowe</translation>
     </message>
     <message>
-        <location filename="main.py" line="67"/>
+        <location filename="main.py" line="70"/>
         <source>Done</source>
-        <translation type="unfinished">Zrobione</translation>
+        <translation>Zrobione</translation>
     </message>
     <message>
-        <location filename="main.py" line="178"/>
+        <location filename="main.py" line="181"/>
         <source>New: %i
 In progress: %i
 Done: %i</source>
-        <translation type="unfinished">Nowe: %i
+        <translation>Nowe: %i
 W trakcie realizacji: %i
 Zrobione: %i</translation>
     </message>
     <message>
-        <location filename="main.py" line="212"/>
+        <location filename="main.py" line="215"/>
         <source>Sorry
 Preview not avalaible</source>
-        <translation type="unfinished">Przykro mi
+        <translation>Przykro mi
 Podgląd nie jest dostępny</translation>
     </message>
     <message>
-        <location filename="main.py" line="226"/>
+        <location filename="main.py" line="229"/>
         <source>No name specified or already exists</source>
-        <translation type="unfinished">Nie podałeś nazwy albo już istnieje</translation>
+        <translation>Nie podałeś nazwy albo już istnieje</translation>
     </message>
     <message>
-        <location filename="main.py" line="67"/>
+        <location filename="main.py" line="70"/>
         <source>In progress</source>
-        <translation type="unfinished">W trakcie realizacji</translation>
+        <translation>W trakcie realizacji</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="356"/>
+        <source>Getting title</source>
+        <translation>Pobieranie tytułu</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="447"/>
+        <source>Warning</source>
+        <translation>Ostrzeżenie</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="403"/>
+        <source>Do you really want to delete link &quot;</source>
+        <translation>Czy naprawdę chcesz usunąć odnośnik &quot;</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="424"/>
+        <source>No job specified or already exists</source>
+        <translation>Nie podano nazwy zadania lub jest już na liście</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="541"/>
+        <source>No job selected</source>
+        <translation>Nie wybrano zadania</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="447"/>
+        <source>Do you really want to delete job &quot;</source>
+        <translation>Czy naprawdę chcesz usunąć zadanie &quot;</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="506"/>
+        <source>Job already on the list</source>
+        <translation>Zadanie już jest na liście</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="249"/>
+        <source>No note selected</source>
+        <translation>Nie wybrano notatki</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="251"/>
+        <source>Do you really want to delete note &quot;</source>
+        <translation>Czy naprawdę chcesz usunąć notatkę &quot;</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="266"/>
+        <source>No name specified or project already exists</source>
+        <translation>Nie podano nazwy lub projekt już istnieje</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="277"/>
+        <source>No project selected</source>
+        <translation>Nie wybrano projektu</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="279"/>
+        <source>Do you really want to delete project &quot;</source>
+        <translation>Czy naprawdę chcesz usunąć projekt &quot;</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="318"/>
+        <source>No document selected</source>
+        <translation>Nie wybrano dokumentu</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="320"/>
+        <source>This application only removes &quot;</source>
+        <translation>Ta aplikacja jedynie usunie &quot;</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="320"/>
+        <source>&quot; from list. Proceed?</source>
+        <translation>&quot; z listy. Kontynuować?</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="337"/>
+        <source>No link specified or already exists</source>
+        <translation>Nie podano odnośnika albo już istnieje</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="393"/>
+        <source>Assigned Note</source>
+        <translation>Przypisana notatka</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="395"/>
+        <source>Something goes wrong. You&apos;ve apparently deleted that note</source>
+        <translation>Coś poszło nie tak. Najwidoczniej usunąłeś tą notatkę</translation>
+    </message>
+    <message>
+        <location filename="main.py" line="401"/>
+        <source>No link selected</source>
+        <translation>Nie wybrano odnośnika</translation>
     </message>
 </context>
 <context>
     <name>ManageProjects</name>
     <message>
-        <location filename="manageprojects_ui.py" line="409"/>
-        <source>LadyBug Project Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="410"/>
-        <source>Projects List:</source>
-        <translation type="unfinished">Lista projektów:</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="435"/>
-        <source>Create</source>
-        <translation type="unfinished">Utwórz</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="436"/>
-        <source>Delete</source>
-        <translation type="unfinished">Usuń</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="413"/>
-        <source>No project selected</source>
-        <translation type="unfinished">Żaden projekt nie został wybrany</translation>
-    </message>
-    <message>
         <location filename="manageprojects_ui.py" line="414"/>
-        <source>Statistics:</source>
-        <translation type="unfinished">Statystyki:</translation>
+        <source>LadyBug Project Manager</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="415"/>
+        <source>Projects List:</source>
+        <translation>Lista projektów:</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="441"/>
+        <source>Create</source>
+        <translation>Utwórz</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="442"/>
+        <source>Delete</source>
+        <translation>Usuń</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="419"/>
+        <source>No project selected</source>
+        <translation>Żaden projekt nie został wybrany</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="420"/>
+        <source>Statistics:</source>
+        <translation>Statystyki:</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="421"/>
         <source>Documents: 
 Notes:
 Links:
 Jobs:</source>
-        <translation type="unfinished">Dokumenty: 
+        <translation>Dokumenty: 
 Notatki:
 Odnośniki:
 Zadania:</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="419"/>
+        <location filename="manageprojects_ui.py" line="425"/>
         <source>Jobs detailed statistics:</source>
-        <translation type="unfinished">Szczegółowe statystyki zadań:</translation>
+        <translation>Szczegółowe statystyki zadań:</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="420"/>
+        <location filename="manageprojects_ui.py" line="426"/>
         <source>New:
 In progress:
 Done:</source>
-        <translation type="unfinished">Nowe:
+        <translation>Nowe:
 W trakcie realizacji:
 Zrobione:</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="423"/>
+        <location filename="manageprojects_ui.py" line="429"/>
         <source>Summary</source>
-        <translation type="unfinished">Podsumowanie</translation>
+        <translation>Podsumowanie</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="459"/>
+        <location filename="manageprojects_ui.py" line="466"/>
         <source>Add</source>
-        <translation type="unfinished">Dodaj</translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="427"/>
+        <location filename="manageprojects_ui.py" line="433"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="432"/>
+        <location filename="manageprojects_ui.py" line="438"/>
         <source>Open</source>
-        <translation type="unfinished">Otwrórz</translation>
+        <translation>Otwrórz</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="433"/>
+        <location filename="manageprojects_ui.py" line="439"/>
         <source>Documents</source>
-        <translation type="unfinished">Dokumenty</translation>
+        <translation>Dokumenty</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="437"/>
+        <location filename="manageprojects_ui.py" line="443"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="474"/>
+        <location filename="manageprojects_ui.py" line="481"/>
         <source>Notes</source>
         <translation>Notatki</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="440"/>
+        <location filename="manageprojects_ui.py" line="446"/>
         <source>Link</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="441"/>
+        <location filename="manageprojects_ui.py" line="447"/>
         <source>Description</source>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="444"/>
+        <location filename="manageprojects_ui.py" line="450"/>
         <source>google.pl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="445"/>
-        <source>search engine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="464"/>
-        <source>Remove</source>
-        <translation type="unfinished">Usuń</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="449"/>
-        <source>Links</source>
-        <translation type="unfinished">Odnośniki</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="451"/>
+        <source>search engine</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="471"/>
+        <source>Remove</source>
+        <translation>Usuń</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="456"/>
+        <source>Links</source>
+        <translation>Odnośniki</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="458"/>
         <source>Job</source>
-        <translation type="unfinished">Zadanie</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="473"/>
-        <source>Deadline</source>
-        <translation type="unfinished">Termin końcowy</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="453"/>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="454"/>
-        <source>Note</source>
-        <translation type="unfinished">Notkatka</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="455"/>
-        <source>dd-MM-yyyy HH:mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="475"/>
-        <source>New</source>
-        <translation type="unfinished">Nowe</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="476"/>
-        <source>In progress</source>
-        <translation type="unfinished">W trakcie realizacji</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="477"/>
-        <source>Done</source>
-        <translation type="unfinished">Zrobione</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="463"/>
-        <source>Edit</source>
-        <translation type="unfinished">Edytuj</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="465"/>
-        <source>None</source>
-        <translation type="unfinished">Brak</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="466"/>
-        <source>Assign Note</source>
-        <translation type="unfinished">Przypisz notatkę</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="467"/>
-        <source>Add to Todays</source>
-        <translation type="unfinished">Dodaj do dzisiejszych</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="468"/>
-        <source>Jobs</source>
-        <translation type="unfinished">Zadania</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="469"/>
-        <source>Jobs for today</source>
-        <translation type="unfinished">Zadania na dzisiaj</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="483"/>
-        <source>Project</source>
-        <translation type="unfinished">Projekt</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="472"/>
-        <source>Progress</source>
-        <translation type="unfinished">Postęp</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="478"/>
-        <source>Delete from list</source>
-        <translation type="unfinished">Usuń z listy</translation>
-    </message>
-    <message>
-        <location filename="manageprojects_ui.py" line="479"/>
-        <source>Projects List</source>
-        <translation type="unfinished">Lista projektów</translation>
+        <translation>Zadanie</translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="480"/>
-        <source>Tabs</source>
-        <translation type="unfinished">Głowne zakładki</translation>
+        <source>Deadline</source>
+        <translation>Termin końcowy</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="481"/>
-        <source>Today&apos;s jobs</source>
-        <translation type="unfinished">Dzisiejsze zadania</translation>
+        <location filename="manageprojects_ui.py" line="460"/>
+        <source>Status</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="461"/>
+        <source>Note</source>
+        <translation>Notatka</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="462"/>
+        <source>dd-MM-yyyy HH:mm</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="482"/>
-        <source>LBPM</source>
-        <translation type="unfinished"></translation>
+        <source>New</source>
+        <translation>Nowe</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="483"/>
+        <source>In progress</source>
+        <translation>W trakcie realizacji</translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="484"/>
-        <source>Document</source>
-        <translation type="unfinished">Dokument</translation>
+        <source>Done</source>
+        <translation>Zrobione</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="485"/>
-        <source>Help</source>
-        <translation type="unfinished">Pomoc</translation>
+        <location filename="manageprojects_ui.py" line="470"/>
+        <source>Edit</source>
+        <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="486"/>
-        <source>Change collection</source>
-        <translation type="unfinished"></translation>
+        <location filename="manageprojects_ui.py" line="472"/>
+        <source>None</source>
+        <translation>Brak</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="487"/>
-        <source>Exit</source>
-        <translation type="unfinished"></translation>
+        <location filename="manageprojects_ui.py" line="473"/>
+        <source>Assign Note</source>
+        <translation>Przypisz notatkę</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="488"/>
-        <source>Delete selected project</source>
-        <translation type="unfinished"></translation>
+        <location filename="manageprojects_ui.py" line="474"/>
+        <source>Add to Todays</source>
+        <translation>Dodaj do dzisiejszych</translation>
     </message>
     <message>
-        <location filename="manageprojects_ui.py" line="489"/>
-        <source>Delete all projects</source>
-        <translation type="unfinished"></translation>
+        <location filename="manageprojects_ui.py" line="475"/>
+        <source>Jobs</source>
+        <translation>Zadania</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="476"/>
+        <source>Jobs for today</source>
+        <translation>Zadania na dzisiaj</translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="490"/>
-        <source>Create new project</source>
-        <translation type="unfinished"></translation>
+        <source>Project</source>
+        <translation>Projekt</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="479"/>
+        <source>Progress</source>
+        <translation>Postęp</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="485"/>
+        <source>Delete from list</source>
+        <translation>Usuń z listy</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="486"/>
+        <source>Projects List</source>
+        <translation>Lista projektów</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="487"/>
+        <source>Tabs</source>
+        <translation>Głowne zakładki</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="488"/>
+        <source>Today&apos;s jobs</source>
+        <translation>Dzisiejsze zadania</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="489"/>
+        <source>LBPM</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="491"/>
-        <source>Clear all project childs</source>
-        <translation type="unfinished"></translation>
+        <source>Document</source>
+        <translation>Dokument</translation>
     </message>
     <message>
         <location filename="manageprojects_ui.py" line="492"/>
+        <source>Help</source>
+        <translation>Pomoc</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="493"/>
+        <source>Change collection</source>
+        <translation>Zmień kolekcję</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="494"/>
+        <source>Exit</source>
+        <translation>Wyjście</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="495"/>
+        <source>Delete selected project</source>
+        <translation>Usuń wybrany projekt</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="496"/>
+        <source>Delete all projects</source>
+        <translation>Usuń wszystkie projekty</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="497"/>
+        <source>Create new project</source>
+        <translation>Utwórz nowy projekt</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="498"/>
+        <source>Clear all project childs</source>
+        <translation>Wyczyść projekt</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="499"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O programie</translation>
+    </message>
+    <message>
+        <location filename="manageprojects_ui.py" line="453"/>
+        <source>Get description</source>
+        <translation>Pobierz opis</translation>
+    </message>
+</context>
+<context>
+    <name>TitleLoader</name>
+    <message>
+        <location filename="getHTMLTitle.py" line="50"/>
+        <source>Error</source>
+        <translation>Błąd</translation>
+    </message>
+    <message>
+        <location filename="getHTMLTitle.py" line="50"/>
+        <source>You need to install BeautifulSoup for that!</source>
+        <translation>Ta funkcjonalność wymaga zainstalowania BeautifulSoup!</translation>
+    </message>
+</context>
+<context>
+    <name>msgBox</name>
+    <message>
+        <location filename="guihelpers.py" line="12"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Anuluj</translation>
     </message>
 </context>
 </TS>

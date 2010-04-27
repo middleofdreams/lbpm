@@ -246,9 +246,9 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.noteslist.currentRow()
 		
 		if item==None:
-			guihelpers.message("Error","No note selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No note selected"),True)
 		else:
-			ret=guihelpers.message("Warning","Do you really want to delete note \""+item.text()+"\" ?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete note \"")+item.text()+"\" ?")
 			if ret==0:
 				self.ui.noteslist.takeItem(n)
 				del self.project.notes[unicode(item.text())]
@@ -263,7 +263,7 @@ class LBPM(QtGui.QMainWindow):
 		name=unicode(self.ui.newProject.text())
 		name=name.strip()
 		if name=="" or name in self.collection.projects:
-			guihelpers.message("Error","No name specified or project already exists",True)
+			guihelpers.message(self.tr("Error"),self.tr("No name specified or project already exists"),True)
 		else:
 			self.collection.create_project(name)
 			self.ui.projectslist.addItem(name)
@@ -274,9 +274,9 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.projectslist.currentRow()
 
 		if item==None:
-			guihelpers.message("Error","No project selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No project selected"),True)
 		else:
-			ret=guihelpers.message("Warning","Do you really want to delete project \""+item.text()+"\" ?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete project \"")+item.text()+"\" ?")
 			if ret==0:
 				try:
 					project=self.project
@@ -305,7 +305,7 @@ class LBPM(QtGui.QMainWindow):
 	def docOpen(self):
 		item=self.ui.docslist.currentItem()
 		if item==None:
-			guihelpers.message("Error","No document selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No document selected"),True)
 		else:
 			text=self.project.documents[unicode(item.text())]
 			subprocess.Popen(["xdg-open",text])
@@ -315,9 +315,9 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.docslist.currentRow()
 
 		if item==None:
-			guihelpers.message("Error","No document selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No document selected"),True)
 		else:
-			ret=guihelpers.message("Warning","This application only removes \""+item.text()+"\" from list. Proceed?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("This application only removes \"")+item.text()+self.tr("\" from list. Proceed?"))
 			if ret==0:			
 				self.ui.docslist.takeItem(n)
 				del self.project.documents[unicode(item.text())]
@@ -334,7 +334,7 @@ class LBPM(QtGui.QMainWindow):
 		if not name.startswith("http://"): name="http://"+name
 
 		if name=="http://" or name in self.project.links:
-			guihelpers.message("Error","No name specified or already exists",True)
+			guihelpers.message(self.tr("Error"),self.tr("No link specified or already exists"),True)
 	
 		else:
 			a = QtGui.QTreeWidgetItem(self.ui.linkslist)
@@ -390,17 +390,17 @@ class LBPM(QtGui.QMainWindow):
 		if note!="--":
 			try:
 				note=project.notes[note]
-				guihelpers.message("Assigned Note",note,True)
+				guihelpers.message(self.tr("Assigned Note"),note,True)
 			except:
-				guihelpers.message("Error","Something goes wrong. You've apparently deleted that note",True)
+				guihelpers.message(self.tr("Error"),self.tr("Something goes wrong. You've apparently deleted that note"),True)
 	def linkDelete(self):
 		item=self.ui.linkslist.currentItem()
 		n=self.ui.linkslist.indexOfTopLevelItem(item)
 
 		if item==None:
-			guihelpers.message("Error","No link selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No link selected"),True)
 		else:
-			ret=guihelpers.message("Warning","Do you really want to delete link \""+item.text(0)+"\" ?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete link \"")+item.text(0)+"\" ?")
 			if ret==0:	
 				del self.project.links[unicode(item.text(0))]
 				self.ui.linkslist.takeTopLevelItem(n)
@@ -421,7 +421,7 @@ class LBPM(QtGui.QMainWindow):
 		status=unicode(status)
 		content=[date,status,None]
 		if name=="" or name in self.project.jobs:
-			guihelpers.message("Error","No job specified or already exists",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job specified or already exists"),True)
 	
 		else:
 			a = QtGui.QTreeWidgetItem(self.ui.jobslist)
@@ -442,9 +442,9 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
-			ret=guihelpers.message("Warning","Do you really want to delete job \""+item.text(0)+"\" ?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete job \"")+item.text(0)+"\" ?")
 			if ret==0:	
 				del self.project.jobs[unicode(item.text(0))]
 				self.ui.jobslist.takeTopLevelItem(n)
@@ -460,7 +460,7 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
 			item=self.ui.jobslist.takeTopLevelItem(n)
 			status=self.ui.jobEditStatus.currentText()
@@ -481,7 +481,7 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
 			note=unicode(self.ui.jobNotes.currentText())
 			if note==self.tr("None"): note="--"
@@ -499,11 +499,11 @@ class LBPM(QtGui.QMainWindow):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
 			name=unicode(item.text(0))
 			if self.todays.check_job(name,self.project.name):
-				guihelpers.message("Error","Job already on the list",True)
+				guihelpers.message(self.tr("Error"),self.tr("Job already on the list"),True)
 			else:
 				p=todays.TodaysJob([self.project.name,name])
 				self.todays.jobs.append(p)
@@ -514,7 +514,7 @@ class LBPM(QtGui.QMainWindow):
 		item=self.ui.todaysJobsList.currentItem()
 		n=self.ui.todaysJobsList.indexOfTopLevelItem(item)
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
 			project=unicode(item.text(0))
 			name=unicode(item.text(1))
@@ -538,7 +538,7 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.todaysJobsList.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message("Error","No job selected",True)
+			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
 		else:
 			item=self.ui.todaysJobsList.takeTopLevelItem(n)
 			status=unicode(status)

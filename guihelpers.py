@@ -9,7 +9,7 @@ def message(title,text,onlyok=False):
 
 		msgBox.addButton("OK",QtGui.QMessageBox.AcceptRole)
 		if not onlyok:
-			msgBox.addButton("Cancel",QtGui.QMessageBox.RejectRole)
+			msgBox.addButton(msgBox.tr("Cancel"),QtGui.QMessageBox.RejectRole)
 		ret = msgBox.exec_()
 		return ret
 def about():
