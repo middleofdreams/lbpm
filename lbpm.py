@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-import sys
+import sys,time
 import main
 from PyQt4 import QtCore,QtGui
 
@@ -15,5 +15,5 @@ if __name__ == "__main__":
 		app.installTranslator(qtTranslator)
 	myapp = main.LBPM()
 	myapp.show()
-	app.exec_()
+	sys.exit(app.exec_())
 

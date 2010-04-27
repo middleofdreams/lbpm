@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manageprojects.ui'
 #
-# Created: Fri Apr 23 07:12:28 2010
+# Created: Mon Apr 26 22:07:15 2010
 #      by: PyQt4 UI code generator 4.7.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -212,6 +212,9 @@ class Ui_ManageProjects(object):
         self.linkDesc = QtGui.QLineEdit(self.tab_3)
         self.linkDesc.setObjectName("linkDesc")
         self.horizontalLayout_8.addWidget(self.linkDesc)
+        self.linkDescGet = QtGui.QPushButton(self.tab_3)
+        self.linkDescGet.setObjectName("linkDescGet")
+        self.horizontalLayout_8.addWidget(self.linkDescGet)
         self.verticalLayout_7.addLayout(self.horizontalLayout_8)
         self.horizontalLayout_9 = QtGui.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
@@ -404,7 +407,7 @@ class Ui_ManageProjects(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(ManageProjects)
-        self.tabs.setCurrentIndex(0)
+        self.tabs.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(ManageProjects)
 
     def retranslateUi(self, ManageProjects):
@@ -447,6 +450,7 @@ class Ui_ManageProjects(object):
         self.linkslist.topLevelItem(0).setText(0, QtGui.QApplication.translate("ManageProjects", "google.pl", None, QtGui.QApplication.UnicodeUTF8))
         self.linkslist.topLevelItem(0).setText(1, QtGui.QApplication.translate("ManageProjects", "search engine", None, QtGui.QApplication.UnicodeUTF8))
         self.linkslist.setSortingEnabled(__sortingEnabled)
+        self.linkDescGet.setText(QtGui.QApplication.translate("ManageProjects", "Get description", None, QtGui.QApplication.UnicodeUTF8))
         self.linkCreate.setText(QtGui.QApplication.translate("ManageProjects", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.linkDelete.setText(QtGui.QApplication.translate("ManageProjects", "Remove", None, QtGui.QApplication.UnicodeUTF8))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_3), QtGui.QApplication.translate("ManageProjects", "Links", None, QtGui.QApplication.UnicodeUTF8))

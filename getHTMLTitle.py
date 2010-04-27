@@ -1,43 +1,57 @@
 # -*- coding: utf-8 -*-
-import urllib,codecs,re
+import urllib,re,time,guihelpers
 from htmlentitydefs import name2codepoint
 from PyQt4 import QtCore,QtGui
-
+try:
+	from BeautifulSoup import BeautifulSoup
+	BS=True
+except:
+	BS=False
+	
 class TitleLoader(QtCore.QThread):
 	def __init__(self, parent, url):
 		super(TitleLoader, self).__init__(parent)
 		self.ui = parent.ui
 		self.parent = parent
 		self.url=url
-		self.running=False
 		self.timer=QtCore.QTimer()
-		self.str=self.tr("Getting title")
-		QtCore.QObject.connect(self.timer, QtCore.SIGNAL("timeout()"), self.progress)
+		#QtCore.QObject.connect(self.timer, QtCore.SIGNAL("timeout()"), self.progress)
 	
 	def run(self):
-		self.ui.linkDesc.setText(self.str)
+		global BS
+		if BS:
+			
 
-		self.timer.start(1)
-		self.timer.setInterval(400)
-
-		sock = urllib.urlopen(self.url)
-		reader=codecs.getreader('utf-8')
-		try:
-			sock=reader(sock)
-			htmlSource = sock.read()
-		except:
-			sock = urllib.urlopen(self.url)
-			htmlSource = sock.read()
-		sock.close()
-		idx1=htmlSource.find("<title>")
-		idx2=htmlSource.find("</title>",idx1)
-		self.timer.stop()
-
-		self.title=htmlSource[idx1+len("<title>"):idx2].strip()
-		try:
-			self.unescape()
-		except: pass
-		self.addLink(self.url,self.title)
+			self.timer.start(1)
+			self.timer.setInterval(400)
+			try:
+				sock = urllib.urlopen(self.url)
+			except:
+				self.title=""
+				self.timer.stop()
+				self.end()
+				self.stop()
+			
+			try:
+				htmlSource = BeautifulSoup(sock.read())
+				sock.close()
+			except:
+				htmlSource = BeautifulSoup("<title> </title>")
+			
+		
+		
+			try:
+				self.title=htmlSource.find('title').contents[0].strip()
+			except:
+				self.title=""
+			try:
+				self.unescape()
+			except: pass
+			self.end()
+		else:
+			guihelpers.message(self.tr("Error"),self.tr("You need to install BeautifulSoup for that!"),True)
+	
+		
 		
 	def unescape(self):
 		self.title= re.sub('&(%s);' % '|'.join(name2codepoint), 
@@ -47,11 +61,8 @@ class TitleLoader(QtCore.QThread):
 		text=self.ui.linkDesc.text()
 		text+="."
 		self.ui.linkDesc.setText(text)
-	def addLink(self,name,desc):
-		a = QtGui.QTreeWidgetItem(self.ui.linkslist)
-		a.setText(0, name)
-		a.setText(1, desc)
-		self.parent.project.links[name]=desc
-		self.parent.project.Save("links")
-		self.ui.linkUrl.clear()
-		self.ui.linkDesc.clear()
+	def end(self):
+		self.timer.setInterval(0)
+		self.timer.stop()
+		
+

@@ -8,7 +8,7 @@ from loadproject import *
 import guihelpers
 from filter import *
 import todays
-from getHTMLTitle import *
+import getHTMLTitle
 
 class LBPM(QtGui.QMainWindow):
 	setcollection="default"
@@ -58,6 +58,7 @@ class LBPM(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.ui.todaysInprogress,QtCore.SIGNAL("clicked()"), self.todaysJobInprogress)
 		QtCore.QObject.connect(self.ui.todaysJobsList,QtCore.SIGNAL("itemActivated(QTreeWidgetItem *,int)"), self.todaysOpenNote)
 		QtCore.QObject.connect(self.ui.jobTimeCheck,QtCore.SIGNAL("clicked()"), self.jobTimeCheck)
+		QtCore.QObject.connect(self.ui.linkDescGet,QtCore.SIGNAL("clicked()"), self.linkDescGet)
 
 		for i in self.collection.projects:
 			self.ui.projectslist.addItem(self.collection.projects[i].name)
@@ -336,14 +337,34 @@ class LBPM(QtGui.QMainWindow):
 			guihelpers.message("Error","No name specified or already exists",True)
 	
 		else:
-			loader=TitleLoader(self,name)
-
-			if desc=="":
-				loader.start()
-			else:
-				loader.addLink(name,desc)
-		self.updateStats()
-
+			a = QtGui.QTreeWidgetItem(self.ui.linkslist)
+			a.setText(0, name)
+			a.setText(1, desc)
+			self.project.links[name]=desc
+			self.project.Save("links")
+			self.ui.linkUrl.clear()
+			self.ui.linkDesc.clear()
+			self.updateStats()
+	def linkDescGet(self):
+		name=self.ui.linkUrl.text()
+		name=unicode(name).strip()
+		self.ui.linkDesc.setText("")
+		if not name.startswith("http://"): name="http://"+name
+		self.ui.linkUrl.setDisabled(True)
+		self.ui.linkDesc.setDisabled(True)
+		self.ui.linkDescGet.setDisabled(True)
+		self.ui.linkDesc.setText(self.tr("Getting title"))
+		self.loader=getHTMLTitle.TitleLoader(self,name)
+		self.loader.start()
+		QtCore.QObject.connect(self.loader,QtCore.SIGNAL("finished()"), self.linkDescGetDone)
+	def linkDescGetDone(self):
+		self.ui.linkDesc.setText(self.loader.title)
+		self.ui.linkUrl.setDisabled(False)
+		self.ui.linkDesc.setDisabled(False)
+		self.ui.linkDescGet.setDisabled(False)
+		
+		
+		
 	def linkOpen(self,e):
 		url= unicode(e.text(0))
 		if not url.startswith("http://") and not url.startswith("https://") and not url.startswith("ftp://"):
@@ -529,3 +550,4 @@ class LBPM(QtGui.QMainWindow):
 			except:
 				pass
 			self.loadTodays()
+			

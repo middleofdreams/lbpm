@@ -103,7 +103,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_5">
          <attribute name="title">
@@ -483,6 +483,13 @@ p, li { white-space: pre-wrap; }
             </item>
             <item>
              <widget class="QLineEdit" name="linkDesc"/>
+            </item>
+            <item>
+             <widget class="QPushButton" name="linkDescGet">
+              <property name="text">
+               <string>Get description</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
