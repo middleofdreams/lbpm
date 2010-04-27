@@ -9,13 +9,11 @@ except:
 	BS=False
 	
 class TitleLoader(QtCore.QThread):
-	def __init__(self, parent, url):
-		super(TitleLoader, self).__init__(parent)
-		self.ui = parent.ui
-		self.parent = parent
+	def __init__(self, url):
+		super(TitleLoader, self).__init__(None)
+
 		self.url=url
 		self.timer=QtCore.QTimer()
-		#QtCore.QObject.connect(self.timer, QtCore.SIGNAL("timeout()"), self.progress)
 	
 	def run(self):
 		global BS
@@ -57,12 +55,9 @@ class TitleLoader(QtCore.QThread):
 		self.title= re.sub('&(%s);' % '|'.join(name2codepoint), 
 				lambda m: unichr(name2codepoint[m.group(1)]), self.title)
 
-	def progress(self):
-		text=self.ui.linkDesc.text()
-		text+="."
-		self.ui.linkDesc.setText(text)
+	
 	def end(self):
 		self.timer.setInterval(0)
 		self.timer.stop()
-		
+		pass
 

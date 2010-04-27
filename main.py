@@ -354,9 +354,15 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.linkDesc.setDisabled(True)
 		self.ui.linkDescGet.setDisabled(True)
 		self.ui.linkDesc.setText(self.tr("Getting title"))
-		self.loader=getHTMLTitle.TitleLoader(self,name)
+		self.loader=getHTMLTitle.TitleLoader(name)
 		self.loader.start()
 		QtCore.QObject.connect(self.loader,QtCore.SIGNAL("finished()"), self.linkDescGetDone)
+		QtCore.QObject.connect(self.loader.timer, QtCore.SIGNAL("timeout()"), self.linkDescGetProgress)
+
+	def linkDescGetProgress(self):
+		text=self.ui.linkDesc.text()
+		text+="."
+		self.ui.linkDesc.setText(text)	
 	def linkDescGetDone(self):
 		self.ui.linkDesc.setText(self.loader.title)
 		self.ui.linkUrl.setDisabled(False)
