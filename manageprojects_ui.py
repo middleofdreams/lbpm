@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manageprojects.ui'
 #
-# Created: Sun May  2 15:47:32 2010
+# Created: Sun May  2 15:59:36 2010
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -206,7 +206,8 @@ class Ui_ManageProjects(object):
         self.horizontalLayout_8 = QtGui.QHBoxLayout()
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.linkUrl = QtGui.QLineEdit(self.tab_3)
-        self.linkUrl.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.linkUrl.setMinimumSize(QtCore.QSize(100, 0))
+        self.linkUrl.setMaximumSize(QtCore.QSize(200, 16777215))
         self.linkUrl.setObjectName("linkUrl")
         self.horizontalLayout_8.addWidget(self.linkUrl)
         self.linkDesc = QtGui.QLineEdit(self.tab_3)

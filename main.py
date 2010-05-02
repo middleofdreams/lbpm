@@ -144,8 +144,9 @@ class LBPM(QtGui.QMainWindow):
 		project=unicode(e.text())
 		self.clearall()
 		self.ui.projectName.setText(project.capitalize())
+		self.setWindowTitle(project.capitalize()+ " - LadyBug Project Manager")
 		project=self.collection.projects[project]
-
+	
 		for i in project.notes:
 			self.ui.noteslist.addItem(i)
 		for i in project.documents:
