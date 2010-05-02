@@ -103,7 +103,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_5">
          <attribute name="title">
@@ -952,7 +952,7 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
-     <string>Project</string>
+     <string>Projects</string>
     </property>
     <addaction name="actionDelete_selected_project"/>
     <addaction name="actionDelete_all_projects"/>
@@ -961,8 +961,11 @@ p, li { white-space: pre-wrap; }
    </widget>
    <widget class="QMenu" name="menuDocument">
     <property name="title">
-     <string>Document</string>
+     <string>Documents</string>
     </property>
+    <addaction name="actionRemove_selected_document"/>
+    <addaction name="actionRemove_all_documents"/>
+    <addaction name="actionCheck_documents_avalaibility"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -970,9 +973,62 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuNotes">
+    <property name="title">
+     <string>Notes</string>
+    </property>
+    <addaction name="actionDelete_selected_note"/>
+    <addaction name="actionDelete_all_notes"/>
+    <addaction name="actionRe_save_all_notes"/>
+   </widget>
+   <widget class="QMenu" name="menuLinks">
+    <property name="title">
+     <string>Links</string>
+    </property>
+    <addaction name="actionDelete_selected_link"/>
+    <addaction name="actionDelete_all_links"/>
+   </widget>
+   <widget class="QMenu" name="menuJobs">
+    <property name="title">
+     <string>Jobs</string>
+    </property>
+    <widget class="QMenu" name="menuMark_selected_job_as">
+     <property name="title">
+      <string>Mark selected job as</string>
+     </property>
+     <addaction name="actionNew"/>
+     <addaction name="actionIn_progress"/>
+     <addaction name="actionDone"/>
+    </widget>
+    <widget class="QMenu" name="menuMark_all_job_as">
+     <property name="title">
+      <string>Mark all job as</string>
+     </property>
+     <addaction name="actionNew_2"/>
+     <addaction name="actionIn_progress_2"/>
+     <addaction name="actionDone_2"/>
+    </widget>
+    <addaction name="menuMark_selected_job_as"/>
+    <addaction name="menuMark_all_job_as"/>
+    <addaction name="separator"/>
+    <addaction name="actionRemove_job"/>
+    <addaction name="actionDelete_jobs_marked_as_done"/>
+    <addaction name="actionRemove_all_jobs"/>
+   </widget>
+   <widget class="QMenu" name="menuTodays">
+    <property name="title">
+     <string>Todays</string>
+    </property>
+    <addaction name="actionClear_todays"/>
+    <addaction name="actionRemove_done_jobs"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>
    <addaction name="menuDocument"/>
+   <addaction name="menuNotes"/>
+   <addaction name="menuLinks"/>
+   <addaction name="menuJobs"/>
+   <addaction name="menuTodays"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -1009,6 +1065,101 @@ p, li { white-space: pre-wrap; }
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionRemove_selected_document">
+   <property name="text">
+    <string>Remove selected document</string>
+   </property>
+  </action>
+  <action name="actionRemove_all_documents">
+   <property name="text">
+    <string>Remove all documents</string>
+   </property>
+  </action>
+  <action name="actionCheck_documents_avalaibility">
+   <property name="text">
+    <string>Check documents avalaibility</string>
+   </property>
+  </action>
+  <action name="actionDelete_selected_note">
+   <property name="text">
+    <string>Delete selected note</string>
+   </property>
+  </action>
+  <action name="actionDelete_all_notes">
+   <property name="text">
+    <string>Delete all notes</string>
+   </property>
+  </action>
+  <action name="actionRe_save_all_notes">
+   <property name="text">
+    <string>Re-save all notes</string>
+   </property>
+  </action>
+  <action name="actionDelete_selected_link">
+   <property name="text">
+    <string>Delete selected link</string>
+   </property>
+  </action>
+  <action name="actionDelete_all_links">
+   <property name="text">
+    <string>Delete all links</string>
+   </property>
+  </action>
+  <action name="actionRemove_job">
+   <property name="text">
+    <string>Delete selected job</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionIn_progress">
+   <property name="text">
+    <string>In progress</string>
+   </property>
+  </action>
+  <action name="actionDone">
+   <property name="text">
+    <string>Done</string>
+   </property>
+  </action>
+  <action name="actionNew_2">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionIn_progress_2">
+   <property name="text">
+    <string>In progress</string>
+   </property>
+  </action>
+  <action name="actionDone_2">
+   <property name="text">
+    <string>Done</string>
+   </property>
+  </action>
+  <action name="actionRemove_all_jobs">
+   <property name="text">
+    <string>Delete all jobs</string>
+   </property>
+  </action>
+  <action name="actionDelete_jobs_marked_as_done">
+   <property name="text">
+    <string>Delete jobs marked as done</string>
+   </property>
+  </action>
+  <action name="actionClear_todays">
+   <property name="text">
+    <string>Clear todays</string>
+   </property>
+  </action>
+  <action name="actionRemove_done_jobs">
+   <property name="text">
+    <string>Remove jobs marked as done</string>
    </property>
   </action>
  </widget>
