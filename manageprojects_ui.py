@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manageprojects.ui'
 #
-# Created: Sun May  2 15:59:36 2010
+# Created: Mon May  3 23:03:25 2010
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -231,6 +231,32 @@ class Ui_ManageProjects(object):
         self.tab_4.setObjectName("tab_4")
         self.verticalLayout_8 = QtGui.QVBoxLayout(self.tab_4)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.horizontalLayout_20 = QtGui.QHBoxLayout()
+        self.horizontalLayout_20.setContentsMargins(-1, 4, -1, 2)
+        self.horizontalLayout_20.setObjectName("horizontalLayout_20")
+        self.label_4 = QtGui.QLabel(self.tab_4)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_20.addWidget(self.label_4)
+        self.jobFilter_All = QtGui.QPushButton(self.tab_4)
+        self.jobFilter_All.setObjectName("jobFilter_All")
+        self.horizontalLayout_20.addWidget(self.jobFilter_All)
+        self.jobFilter_New = QtGui.QPushButton(self.tab_4)
+        self.jobFilter_New.setCheckable(True)
+        self.jobFilter_New.setChecked(True)
+        self.jobFilter_New.setFlat(False)
+        self.jobFilter_New.setObjectName("jobFilter_New")
+        self.horizontalLayout_20.addWidget(self.jobFilter_New)
+        self.jobFilter_InProgress = QtGui.QPushButton(self.tab_4)
+        self.jobFilter_InProgress.setCheckable(True)
+        self.jobFilter_InProgress.setChecked(True)
+        self.jobFilter_InProgress.setObjectName("jobFilter_InProgress")
+        self.horizontalLayout_20.addWidget(self.jobFilter_InProgress)
+        self.jobFilter_Done = QtGui.QPushButton(self.tab_4)
+        self.jobFilter_Done.setCheckable(True)
+        self.jobFilter_Done.setChecked(False)
+        self.jobFilter_Done.setObjectName("jobFilter_Done")
+        self.horizontalLayout_20.addWidget(self.jobFilter_Done)
+        self.verticalLayout_8.addLayout(self.horizontalLayout_20)
         self.jobslist = QtGui.QTreeWidget(self.tab_4)
         self.jobslist.setIndentation(0)
         self.jobslist.setAnimated(True)
@@ -366,7 +392,7 @@ class Ui_ManageProjects(object):
         self.verticalLayout_10.addLayout(self.horizontalLayout_16)
         ManageProjects.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(ManageProjects)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 869, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 869, 23))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -531,6 +557,11 @@ class Ui_ManageProjects(object):
         self.linkCreate.setText(QtGui.QApplication.translate("ManageProjects", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.linkDelete.setText(QtGui.QApplication.translate("ManageProjects", "Remove", None, QtGui.QApplication.UnicodeUTF8))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_3), QtGui.QApplication.translate("ManageProjects", "Links", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("ManageProjects", "Show: ", None, QtGui.QApplication.UnicodeUTF8))
+        self.jobFilter_All.setText(QtGui.QApplication.translate("ManageProjects", "All", None, QtGui.QApplication.UnicodeUTF8))
+        self.jobFilter_New.setText(QtGui.QApplication.translate("ManageProjects", "New", None, QtGui.QApplication.UnicodeUTF8))
+        self.jobFilter_InProgress.setText(QtGui.QApplication.translate("ManageProjects", "In progress", None, QtGui.QApplication.UnicodeUTF8))
+        self.jobFilter_Done.setText(QtGui.QApplication.translate("ManageProjects", "Done", None, QtGui.QApplication.UnicodeUTF8))
         self.jobslist.setSortingEnabled(True)
         self.jobslist.headerItem().setText(0, QtGui.QApplication.translate("ManageProjects", "Job", None, QtGui.QApplication.UnicodeUTF8))
         self.jobslist.headerItem().setText(1, QtGui.QApplication.translate("ManageProjects", "Deadline", None, QtGui.QApplication.UnicodeUTF8))

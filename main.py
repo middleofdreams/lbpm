@@ -62,6 +62,11 @@ class LBPM(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.ui.jobTimeCheck,QtCore.SIGNAL("clicked()"), self.jobTimeCheck)
 		QtCore.QObject.connect(self.ui.linkDescGet,QtCore.SIGNAL("clicked()"), self.linkDescGet)
 		QtCore.QObject.connect(self.ui.notetext,QtCore.SIGNAL("textChanged()"), self.notesave_enable)
+		QtCore.QObject.connect(self.ui.jobFilter_All,QtCore.SIGNAL("clicked()"), self.changeFilterAll)
+		QtCore.QObject.connect(self.ui.jobFilter_New,QtCore.SIGNAL("clicked()"), self.loadJobs)
+		QtCore.QObject.connect(self.ui.jobFilter_Done,QtCore.SIGNAL("clicked()"), self.loadJobs)
+		QtCore.QObject.connect(self.ui.jobFilter_InProgress,QtCore.SIGNAL("clicked()"), self.loadJobs)
+
 
 		for i in self.collection.projects:
 			self.ui.projectslist.addItem(self.collection.projects[i].name)
@@ -101,8 +106,19 @@ class LBPM(QtGui.QMainWindow):
 				deadline=None
 				status=None
 				
+	def changeFilterAll(self):
+		self.ui.jobFilter_New.setChecked(True)
+		self.ui.jobFilter_Done.setChecked(True)
+		self.ui.jobFilter_InProgress.setChecked(True)
+		self.loadJobs()
 	
-				
+	def checkFilter(self):
+		dont_show=[self.tr('New'),self.tr("In progress"),self.tr("Done")]
+		if self.ui.jobFilter_Done.isChecked(): dont_show.pop(2)
+		if self.ui.jobFilter_InProgress.isChecked(): dont_show.pop(1)
+		if self.ui.jobFilter_New.isChecked(): dont_show.pop(0)
+		return dont_show
+		
 	def changeOp1(self):self.changeOp(1)
 	def changeOp2(self):self.changeOp(2)
 	def changeOp3(self):self.changeOp(3)
@@ -159,8 +175,9 @@ class LBPM(QtGui.QMainWindow):
 			a = QtGui.QTreeWidgetItem(self.ui.linkslist)
 			a.setText(0, i)
 			a.setText(1, project.links[i])
-		self.loadJobs(project)
+		
 		self.project=project
+		self.loadJobs()
 		self.updateStats()
 		self.updateJobsStats()
 		self.jobNotesUpdate()
@@ -171,7 +188,6 @@ class LBPM(QtGui.QMainWindow):
 		notes=len(self.project.notes)
 		links=len(self.project.links)
 		jobs=len(self.project.jobs)
-		
 		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nJobs: %i")) %(docs,notes,links,jobs)
 		self.ui.projectStatistics.setText(stats)		
 			
@@ -188,19 +204,23 @@ class LBPM(QtGui.QMainWindow):
 		stats=unicode(self.tr("New: %i\nIn progress: %i\nDone: %i")) %(new,in_progress,done)
 		self.ui.projectJobsStatistics.setText(stats)		
 
-	def loadJobs(self,project):
+	def loadJobs(self):
+		project=self.project
+		stat_filter=self.checkFilter()
 		self.ui.jobslist.clear()
 		for i in project.jobs:
-			a = QtGui.QTreeWidgetItem(self.ui.jobslist)
-			note=project.jobs[i][2]
-			if note==None: note="--"
-			a.setText(0, i)
-			a.setText(1, project.jobs[i][0])
-			a.setText(2, project.jobs[i][1])
-			a.setText(3, note)
-
 			status=project.jobs[i][1]
-			a=guihelpers.jobStatusColor(a,status,self._statuses)
+			if not status in stat_filter:
+				a = QtGui.QTreeWidgetItem(self.ui.jobslist)
+				note=project.jobs[i][2]
+				if note==None: note="--"
+				a.setText(0, i)
+				a.setText(1, project.jobs[i][0])
+				a.setText(2, project.jobs[i][1])
+				a.setText(3, note)
+
+				
+				a=guihelpers.jobStatusColor(a,status,self._statuses)
 
 			
 	def load_note(self,e):
