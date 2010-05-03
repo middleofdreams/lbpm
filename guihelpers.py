@@ -15,7 +15,7 @@ def message(title,text,onlyok=False):
 def about():
 		msgBox=QtGui.QMessageBox()
 		msgBox.setWindowTitle("About")
-		msgBox.setText("<B><font size=+2>LadyBug Project Manager</font><br/><center>0.1</center></b>")
+		msgBox.setText("<B><font size=+2>LadyBug Project Manager</font><br/><center>0.2</center></b>")
 		msgBox.setTextFormat(1)
 		msgBox.setInformativeText(u"LBPM is an application for collecting information, text, links, jobs about every project you participate in.\n\nCopyright Kuba Wrożyna")
 		msgBox.addButton("Close",QtGui.QMessageBox.AcceptRole)

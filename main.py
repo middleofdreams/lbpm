@@ -61,6 +61,7 @@ class LBPM(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.ui.todaysJobsList,QtCore.SIGNAL("itemActivated(QTreeWidgetItem *,int)"), self.todaysOpenNote)
 		QtCore.QObject.connect(self.ui.jobTimeCheck,QtCore.SIGNAL("clicked()"), self.jobTimeCheck)
 		QtCore.QObject.connect(self.ui.linkDescGet,QtCore.SIGNAL("clicked()"), self.linkDescGet)
+		QtCore.QObject.connect(self.ui.notetext,QtCore.SIGNAL("textChanged()"), self.notesave_enable)
 
 		for i in self.collection.projects:
 			self.ui.projectslist.addItem(self.collection.projects[i].name)
@@ -76,7 +77,8 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.jobTime.setDisabled(True)
 		else:
 			self.ui.jobTime.setDisabled(False)
-		
+	def notesave_enable(self):
+		self.ui.noteSave.setEnabled(True)	
 	def loadTodays(self):
 		self.ui.todaysJobsList.clear()
 		for job in self.todays.jobs:
@@ -162,6 +164,8 @@ class LBPM(QtGui.QMainWindow):
 		self.updateStats()
 		self.updateJobsStats()
 		self.jobNotesUpdate()
+		self.ui.noteSave.setEnabled(False)
+
 	def updateStats(self):
 		docs=len(self.project.documents)
 		notes=len(self.project.notes)
@@ -200,12 +204,16 @@ class LBPM(QtGui.QMainWindow):
 
 			
 	def load_note(self,e):
+		if self.ui.noteSave.isEnabled():
+			ret=guihelpers.message(self.tr("Warning"),self.tr("All changes made in previous note will be lost. Proceed?"))
+			if ret!=0: return 0
 		note=unicode(e.text())
 		text=self.project.notes[note]
 		self.ui.notetext.clear()
 		self.ui.notetext.append(text.replace("<br/>","\n"))
 		self.note=note
 		self.ui.notetext.setDisabled(False)
+		self.ui.noteSave.setEnabled(False)
 	def load_doc(self,e):
 		doc=unicode(e.text())
 		text=self.project.documents[doc]
@@ -224,7 +232,7 @@ class LBPM(QtGui.QMainWindow):
 		text=self.ui.notetext.toPlainText()
 		self.project.notes[self.note]=text
 		self.project.Save("notes")
-		
+		self.ui.noteSave.setEnabled(False)
 	def noteCreate(self):
 		name=self.ui.newnote.text()
 		name=unicode(name).strip()
@@ -232,6 +240,9 @@ class LBPM(QtGui.QMainWindow):
 			guihelpers.message(self.tr("Error"),self.tr("No name specified or already exists"),True)
 	
 		else:
+			if self.ui.noteSave.isEnabled():
+				ret=guihelpers.message(self.tr("Warning"),self.tr("All changes made in previous note will be lost. Proceed?"))
+				if ret!=0: return 0
 			self.ui.noteslist.addItem(name)
 			self.project.notes[name]=""
 			self.project.Save("notes")
