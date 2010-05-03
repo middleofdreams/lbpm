@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import sys,os,subprocess
+import sys,os,subprocess,datetime
 from PyQt4 import QtCore, QtGui
 from manageprojects_ui import *
 
@@ -25,9 +25,11 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.jobslist.setColumnWidth(1,130)
 		self.ui.jobslist.setColumnWidth(2,120)
 		self.ui.linkslist.setColumnWidth(0,200)
-
+		now=datetime.date.today()
+		nt=datetime.time(0,0)
+		now=datetime.datetime.combine(now,nt)+datetime.timedelta(days=1)
 		
-		
+		self.ui.jobTime.setDateTime(now)
 		QtCore.QObject.connect(self.ui.projectslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_project)
 		QtCore.QObject.connect(self.ui.noteslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_note)
 		QtCore.QObject.connect(self.ui.docslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_doc)
