@@ -30,38 +30,7 @@ class LBPM(QtGui.QMainWindow):
 		now=datetime.datetime.combine(now,nt)+datetime.timedelta(days=1)
 		
 		self.ui.jobTime.setDateTime(now)
-		QtCore.QObject.connect(self.ui.projectslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_project)
-		QtCore.QObject.connect(self.ui.noteslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_note)
-		QtCore.QObject.connect(self.ui.docslist,QtCore.SIGNAL("itemActivated(QListWidgetItem *)"), self.load_doc)
-		QtCore.QObject.connect(self.ui.noteSave,QtCore.SIGNAL("clicked()"), self.noteSave)
-		QtCore.QObject.connect(self.ui.noteCreate,QtCore.SIGNAL("clicked()"), self.noteCreate)
-		QtCore.QObject.connect(self.ui.noteDelete,QtCore.SIGNAL("clicked()"), self.noteDelete)
-		QtCore.QObject.connect(self.ui.projectCreate,QtCore.SIGNAL("clicked()"), self.projectCreate)
-		QtCore.QObject.connect(self.ui.projectDelete,QtCore.SIGNAL("clicked()"), self.projectDelete)
-		QtCore.QObject.connect(self.ui.docCreate,QtCore.SIGNAL("clicked()"), self.docCreate)
-		QtCore.QObject.connect(self.ui.docOpen,QtCore.SIGNAL("clicked()"), self.docOpen)
-		QtCore.QObject.connect(self.ui.docDelete,QtCore.SIGNAL("clicked()"), self.docDelete)
-		QtCore.QObject.connect(self.ui.linkCreate,QtCore.SIGNAL("clicked()"), self.linkCreate)
-		QtCore.QObject.connect(self.ui.linkslist,QtCore.SIGNAL("itemActivated(QTreeWidgetItem *,int)"), self.linkOpen)
-		QtCore.QObject.connect(self.ui.linkDelete,QtCore.SIGNAL("clicked()"), self.linkDelete)
-		QtCore.QObject.connect(self.ui.jobCreate,QtCore.SIGNAL("clicked()"), self.jobCreate)
-		QtCore.QObject.connect(self.ui.jobEdit,QtCore.SIGNAL("clicked()"), self.jobEdit)
-		QtCore.QObject.connect(self.ui.jobDelete,QtCore.SIGNAL("clicked()"), self.jobDelete)
-		QtCore.QObject.connect(self.ui.actionAbout,QtCore.SIGNAL("activated()"), self.aabout)
-		QtCore.QObject.connect(self.ui.op1,QtCore.SIGNAL("clicked()"), self.changeOp1)
-		QtCore.QObject.connect(self.ui.op2,QtCore.SIGNAL("clicked()"), self.changeOp2)
-		QtCore.QObject.connect(self.ui.op3,QtCore.SIGNAL("clicked()"), self.changeOp3)
-		QtCore.QObject.connect(self.ui.jobAssignNote,QtCore.SIGNAL("clicked()"), self.jobAssignNote)
-		QtCore.QObject.connect(self.ui.jobslist,QtCore.SIGNAL("itemActivated(QTreeWidgetItem *,int)"), self.jobOpenNote)
-		QtCore.QObject.connect(self.ui.jobAddToTodays,QtCore.SIGNAL("clicked()"), self.jobAddToTodays)
-		QtCore.QObject.connect(self.ui.todaysDelete,QtCore.SIGNAL("clicked()"), self.todaysDelete)
-		QtCore.QObject.connect(self.ui.todaysNew,QtCore.SIGNAL("clicked()"), self.todaysJobNew)
-		QtCore.QObject.connect(self.ui.todaysDone,QtCore.SIGNAL("clicked()"), self.todaysJobDone)
-		QtCore.QObject.connect(self.ui.todaysInprogress,QtCore.SIGNAL("clicked()"), self.todaysJobInprogress)
-		QtCore.QObject.connect(self.ui.todaysJobsList,QtCore.SIGNAL("itemActivated(QTreeWidgetItem *,int)"), self.todaysOpenNote)
-		QtCore.QObject.connect(self.ui.jobTimeCheck,QtCore.SIGNAL("clicked()"), self.jobTimeCheck)
-		QtCore.QObject.connect(self.ui.linkDescGet,QtCore.SIGNAL("clicked()"), self.linkDescGet)
-		QtCore.QObject.connect(self.ui.notetext,QtCore.SIGNAL("textChanged()"), self.notesave_enable)
+
 
 		for i in self.collection.projects:
 			self.ui.projectslist.addItem(self.collection.projects[i].name)
@@ -71,13 +40,14 @@ class LBPM(QtGui.QMainWindow):
 		self.loadTodays()
 		
 		self._statuses=[self.tr('New'),self.tr("In progress"),self.tr("Done")]
-		
-	def jobTimeCheck(self):
+	
+	@QtCore.pyqtSlot()		
+	def on_jobTimeCheck_clicked(self):
 		if self.ui.jobTime.isEnabled():
 			self.ui.jobTime.setDisabled(True)
 		else:
 			self.ui.jobTime.setDisabled(False)
-	def notesave_enable(self):
+	def on_notetext_textChanged(self):
 		self.ui.noteSave.setEnabled(True)	
 	def loadTodays(self):
 		self.ui.todaysJobsList.clear()
@@ -102,10 +72,12 @@ class LBPM(QtGui.QMainWindow):
 				status=None
 				
 	
-				
-	def changeOp1(self):self.changeOp(1)
-	def changeOp2(self):self.changeOp(2)
-	def changeOp3(self):self.changeOp(3)
+	@QtCore.pyqtSlot()				
+	def on_op1_clicked(self):self.changeOp(1)
+	@QtCore.pyqtSlot()	
+	def on_op2_clicked(self):self.changeOp(2)
+	@QtCore.pyqtSlot()	
+	def on_op3_clicked(self):self.changeOp(3)
 	
 	def changeOp(self,op):
 		
@@ -124,7 +96,7 @@ class LBPM(QtGui.QMainWindow):
 			if op==3:
 				self.ui.op2.setEnabled(True)
 
-	def aabout(self):	
+	def on_actionAbout_activated(self):	
 		guihelpers.about()
 		
 	def jobNotesUpdate(self):
@@ -142,8 +114,12 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.doctext.clear()
 		self.ui.notetext.setDisabled(True)
 		self.ui.doctext.setDisabled(True)
-		
-	def load_project(self,e):
+		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nJobs: %i")) %(0,0,0,0)
+		self.ui.projectStatistics.setText(stats)	
+		stats=unicode(self.tr("New: %i\nIn progress: %i\nDone: %i")) %(0,0,0)
+		self.ui.projectJobsStatistics.setText(stats)
+		self.ui.projectName.setText(self.tr("No project selected"))
+	def on_projectslist_itemActivated(self,e):
 		self.ui.tabs.setDisabled(False)
 		project=unicode(e.text())
 		self.clearall()
@@ -203,7 +179,7 @@ class LBPM(QtGui.QMainWindow):
 			a=guihelpers.jobStatusColor(a,status,self._statuses)
 
 			
-	def load_note(self,e):
+	def on_noteslist_itemActivated(self,e):
 		if self.ui.noteSave.isEnabled():
 			ret=guihelpers.message(self.tr("Warning"),self.tr("All changes made in previous note will be lost. Proceed?"))
 			if ret!=0: return 0
@@ -214,7 +190,7 @@ class LBPM(QtGui.QMainWindow):
 		self.note=note
 		self.ui.notetext.setDisabled(False)
 		self.ui.noteSave.setEnabled(False)
-	def load_doc(self,e):
+	def on_docslist_itemActivated(self,e):
 		doc=unicode(e.text())
 		text=self.project.documents[doc]
 		self.ui.doctext.clear()
@@ -227,13 +203,14 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.doctext.append(text)
 		self.ui.doctext.setDisabled(False)
 
-
-	def noteSave(self):
+	@QtCore.pyqtSlot()	
+	def on_noteSave_clicked(self):
 		text=self.ui.notetext.toPlainText()
 		self.project.notes[self.note]=text
 		self.project.Save("notes")
 		self.ui.noteSave.setEnabled(False)
-	def noteCreate(self):
+	@QtCore.pyqtSlot()		
+	def on_noteCreate_clicked(self):
 		name=self.ui.newnote.text()
 		name=unicode(name).strip()
 		if name=="" or name in self.project.notes:
@@ -254,8 +231,8 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.notetext.setDisabled(False)
 		self.updateStats()
 		self.jobNotesUpdate()
-
-	def noteDelete(self):
+	@QtCore.pyqtSlot()	
+	def on_noteDelete_clicked(self):
 		item=self.ui.noteslist.currentItem()
 		n=self.ui.noteslist.currentRow()
 		
@@ -272,8 +249,8 @@ class LBPM(QtGui.QMainWindow):
 				self.updateStats()
 				self.jobNotesUpdate()
 
-				
-	def projectCreate(self):
+	@QtCore.pyqtSlot()			
+	def on_projectCreate_clicked(self):
 		name=unicode(self.ui.newProject.text())
 		name=name.strip()
 		if name=="" or name in self.collection.projects:
@@ -282,8 +259,9 @@ class LBPM(QtGui.QMainWindow):
 			self.collection.create_project(name)
 			self.ui.projectslist.addItem(name)
 			self.ui.newProject.clear()
-			
-	def projectDelete(self):
+	
+	@QtCore.pyqtSlot()			
+	def on_projectDelete_clicked(self):
 		item=self.ui.projectslist.currentItem()
 		n=self.ui.projectslist.currentRow()
 
@@ -298,13 +276,13 @@ class LBPM(QtGui.QMainWindow):
 					project=None
 				if self.collection.projects[unicode(item.text())]==project:
 					self.clearall()
-					self.ui.tabWidget.setDisabled(True)
+					self.ui.tabs.setDisabled(True)
 					
 				self.ui.projectslist.takeItem(n)
 				self.collection.delete_project(unicode(item.text()))
 				
-				
-	def docCreate(self):
+	@QtCore.pyqtSlot()				
+	def on_docCreate_clicked(self):
 		fd = QtGui.QFileDialog()
 		path=fd.getOpenFileName()
 		file=unicode(path).split("/")
@@ -315,16 +293,16 @@ class LBPM(QtGui.QMainWindow):
 		self.updateStats()
 
 		return 0
-		
-	def docOpen(self):
+	@QtCore.pyqtSlot()		
+	def on_docOpen_clicked(self):
 		item=self.ui.docslist.currentItem()
 		if item==None:
 			guihelpers.message(self.tr("Error"),self.tr("No document selected"),True)
 		else:
 			text=self.project.documents[unicode(item.text())]
 			subprocess.Popen(["xdg-open",text])
-		
-	def docDelete(self):
+	@QtCore.pyqtSlot()		
+	def on_docDelete_clicked(self):
 		item=self.ui.docslist.currentItem()
 		n=self.ui.docslist.currentRow()
 
@@ -339,8 +317,8 @@ class LBPM(QtGui.QMainWindow):
 				self.ui.doctext.clear()
 				self.updateStats()
 
-				
-	def linkCreate(self):
+	@QtCore.pyqtSlot()				
+	def on_linkCreate_clicked(self):
 		name=self.ui.linkUrl.text()
 		name=unicode(name).strip()
 		desc=self.ui.linkDesc.text()
@@ -359,7 +337,9 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.linkUrl.clear()
 			self.ui.linkDesc.clear()
 			self.updateStats()
-	def linkDescGet(self):
+			
+	@QtCore.pyqtSlot()			
+	def on_linkDescGet_clicked(self):
 		name=self.ui.linkUrl.text()
 		name=unicode(name).strip()
 		self.ui.linkDesc.setText("")
@@ -377,6 +357,7 @@ class LBPM(QtGui.QMainWindow):
 		text=self.ui.linkDesc.text()
 		text+="."
 		self.ui.linkDesc.setText(text)	
+	
 	def linkDescGetDone(self):
 		self.ui.linkDesc.setText(self.loader.title)
 		self.ui.linkUrl.setDisabled(False)
@@ -385,16 +366,18 @@ class LBPM(QtGui.QMainWindow):
 		
 		
 		
-	def linkOpen(self,e):
+	def on_linkslist_itemActivated(self,e):
 		url= unicode(e.text(0))
 		if not url.startswith("http://") and not url.startswith("https://") and not url.startswith("ftp://"):
 			url="http://"+url
 		subprocess.Popen(["xdg-open",url])
-	def jobOpenNote(self,e):
+		
+		
+	def on_jobslist_itemActivated(self,e):
 		note= unicode(e.text(3))
 		self.OpenPopupNote(note,self.project)
 	
-	def todaysOpenNote(self,e):
+	def on_todaysJobsList_itemActivated(self,e):
 		note= unicode(e.text(4))
 		project=unicode(e.text(0))
 		project=self.collection.projects[project]
@@ -407,7 +390,8 @@ class LBPM(QtGui.QMainWindow):
 				guihelpers.message(self.tr("Assigned Note"),note,True)
 			except:
 				guihelpers.message(self.tr("Error"),self.tr("Something goes wrong. You've apparently deleted that note"),True)
-	def linkDelete(self):
+	@QtCore.pyqtSlot()	
+	def on_linkDelete_clicked(self):
 		item=self.ui.linkslist.currentItem()
 		n=self.ui.linkslist.indexOfTopLevelItem(item)
 
@@ -421,8 +405,8 @@ class LBPM(QtGui.QMainWindow):
 
 				self.project.Save("links")
 		self.updateStats()
-		
-	def jobCreate(self):
+	@QtCore.pyqtSlot()		
+	def on_jobCreate_clicked(self):
 		name=self.ui.jobName.text()
 		name=unicode(name).strip()
 		if self.ui.jobTimeCheck.isChecked():
@@ -450,8 +434,8 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.jobName.clear()
 			self.updateStats()
 			self.updateJobsStats()
-
-	def jobDelete(self):
+	@QtCore.pyqtSlot()	
+	def on_jobDelete_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
@@ -468,8 +452,8 @@ class LBPM(QtGui.QMainWindow):
 				self.updateJobsStats()
 
 
-				
-	def jobEdit(self):
+	@QtCore.pyqtSlot()				
+	def on_jobEdit_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
@@ -489,8 +473,8 @@ class LBPM(QtGui.QMainWindow):
 			self.project.Save("jobs")
 			self.updateJobsStats()
 			self.loadTodays()
-
-	def jobAssignNote(self):
+	@QtCore.pyqtSlot()	
+	def on_jobAssignNote_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
@@ -509,7 +493,8 @@ class LBPM(QtGui.QMainWindow):
 
 			self.project.Save("jobs")
 			self.loadTodays()
-	def jobAddToTodays(self):
+	@QtCore.pyqtSlot()			
+	def on_jobAddToTodays_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		if item==None:
@@ -523,8 +508,8 @@ class LBPM(QtGui.QMainWindow):
 				self.todays.jobs.append(p)
 				self.todays.save_jobs()
 				self.loadTodays()
-				
-	def todaysDelete(self):
+	@QtCore.pyqtSlot()				
+	def on_todaysDelete_clicked(self):
 		item=self.ui.todaysJobsList.currentItem()
 		n=self.ui.todaysJobsList.indexOfTopLevelItem(item)
 		if item==None:
@@ -539,12 +524,14 @@ class LBPM(QtGui.QMainWindow):
 			self.todays.save_jobs()
 			self.loadTodays()
 	
-	
-	def todaysJobNew(self):
+	@QtCore.pyqtSlot()	
+	def on_todaysNew_clicked(self):
 		self.todaysJobEdit(self._statuses[0])
-	def todaysJobDone(self):
+	@QtCore.pyqtSlot()	
+	def on_todaysDone_clicked(self):
 		self.todaysJobEdit(self._statuses[1])
-	def todaysJobInprogress(self):
+	@QtCore.pyqtSlot()	
+	def on_todaysInprogress_clicked(self):
 		self.todaysJobEdit(self._statuses[2])	
 				
 	def todaysJobEdit(self,status):
