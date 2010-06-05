@@ -17,38 +17,47 @@ class TitleLoader(QtCore.QThread):
 	
 	def run(self):
 		global BS
-		if BS:
-			
-
-			self.timer.start(1)
-			self.timer.setInterval(400)
+		self.BS=BS
+		self.timer.start(1)
+		self.timer.setInterval(400)
+		try:
+			sock = urllib.urlopen(self.url)
+		except:
+			self.title=""
+			self.timer.stop()
+			self.end()
+			self.stop()
+		content=sock.read()
+		sock.close()
+		if BS:			
+			if self.getTitleByBS(content)>0:
+				self.getTitleManually(content)
+		else:
+			self.getTitleManually(content)
+		sock.close()
+		self.end()
+		
+	def getTitleByBS(self,content):
+			err=0
 			try:
-				sock = urllib.urlopen(self.url)
-			except:
-				self.title=""
-				self.timer.stop()
-				self.end()
-				self.stop()
-			
-			try:
-				htmlSource = BeautifulSoup(sock.read())
-				sock.close()
+				htmlSource = BeautifulSoup(content)	
 			except:
 				htmlSource = BeautifulSoup("<title> </title>")
+				err=1
+			self.title=htmlSource.find('title').contents[0].strip()
 			
-		
-		
-			try:
-				self.title=htmlSource.find('title').contents[0].strip()
-			except:
-				self.title=""
-			try:
-				self.unescape()
+			try: self.unescape()
 			except: pass
-			self.end()
-		else:
-			guihelpers.message(self.tr("Error"),self.tr("You need to install BeautifulSoup for that!"),True)
+			return err
 	
+	def getTitleManually(self,content):
+		content=content.lower().strip()
+		idx1=content.find("<title>")
+		idx2=content.find("</title>",idx1)
+		self.title= content[idx1+len("<title>"):idx2].strip().capitalize()
+		try: self.unescape()
+		except: pass
+
 		
 		
 	def unescape(self):
