@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'manageprojects.ui'
 #
-# Created: Sun May  2 15:59:36 2010
+# Created: Sat Jun  5 09:16:29 2010
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -366,7 +366,7 @@ class Ui_ManageProjects(object):
         self.verticalLayout_10.addLayout(self.horizontalLayout_16)
         ManageProjects.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(ManageProjects)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 869, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 869, 23))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -518,6 +518,7 @@ class Ui_ManageProjects(object):
         self.noteCreate.setText(QtGui.QApplication.translate("ManageProjects", "Create", None, QtGui.QApplication.UnicodeUTF8))
         self.noteDelete.setText(QtGui.QApplication.translate("ManageProjects", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.noteSave.setText(QtGui.QApplication.translate("ManageProjects", "Save", None, QtGui.QApplication.UnicodeUTF8))
+        self.noteSave.setShortcut(QtGui.QApplication.translate("ManageProjects", "Ctrl+S", None, QtGui.QApplication.UnicodeUTF8))
         self.tabs.setTabText(self.tabs.indexOf(self.tab_2), QtGui.QApplication.translate("ManageProjects", "Notes", None, QtGui.QApplication.UnicodeUTF8))
         self.linkslist.setSortingEnabled(True)
         self.linkslist.headerItem().setText(0, QtGui.QApplication.translate("ManageProjects", "Link", None, QtGui.QApplication.UnicodeUTF8))
