@@ -9,7 +9,7 @@ import guihelpers
 from filter import *
 import todays
 import getHTMLTitle
-
+from logs import Logs
 class LBPM(QtGui.QMainWindow):
 	setcollection="default"
 
@@ -40,7 +40,7 @@ class LBPM(QtGui.QMainWindow):
 		self.loadTodays()
 		
 		self._statuses=[self.tr('New'),self.tr("In progress"),self.tr("Done")]
-	
+		self.logs=Logs(self.ui.statusBar,self.tr("LBPM initialized"))
 	@QtCore.pyqtSlot()		
 	def on_jobTimeCheck_clicked(self):
 		if self.ui.jobTime.isEnabled():
@@ -114,7 +114,7 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.doctext.clear()
 		self.ui.notetext.setDisabled(True)
 		self.ui.doctext.setDisabled(True)
-		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nJobs: %i")) %(0,0,0,0)
+		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nTasks: %i")) %(0,0,0,0)
 		self.ui.projectStatistics.setText(stats)	
 		stats=unicode(self.tr("New: %i\nIn progress: %i\nDone: %i")) %(0,0,0)
 		self.ui.projectJobsStatistics.setText(stats)
@@ -141,6 +141,7 @@ class LBPM(QtGui.QMainWindow):
 		self.updateJobsStats()
 		self.jobNotesUpdate()
 		self.ui.noteSave.setEnabled(False)
+		self.logs.add(self.tr("Project '%s' loaded" %e.text()))
 
 	def updateStats(self):
 		docs=len(self.project.documents)
@@ -148,7 +149,7 @@ class LBPM(QtGui.QMainWindow):
 		links=len(self.project.links)
 		jobs=len(self.project.jobs)
 		
-		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nJobs: %i")) %(docs,notes,links,jobs)
+		stats=unicode(self.tr("Documents: %i\nNotes: %i\nLinks: %i\nTasks: %i")) %(docs,notes,links,jobs)
 		self.ui.projectStatistics.setText(stats)		
 			
 	def updateJobsStats(self):
@@ -190,6 +191,8 @@ class LBPM(QtGui.QMainWindow):
 		self.note=note
 		self.ui.notetext.setDisabled(False)
 		self.ui.noteSave.setEnabled(False)
+		self.logs.add(self.tr("Note '%s' opened" %e.text()))
+
 	def on_docslist_itemActivated(self,e):
 		doc=unicode(e.text())
 		text=self.project.documents[doc]
@@ -202,6 +205,8 @@ class LBPM(QtGui.QMainWindow):
 			text=self.tr("Sorry\nPreview not avalaible")
 		self.ui.doctext.append(text)
 		self.ui.doctext.setDisabled(False)
+		self.logs.add(self.tr("Document '%s' selected" %e.text()))
+
 
 	@QtCore.pyqtSlot()	
 	def on_noteSave_clicked(self):
@@ -209,6 +214,8 @@ class LBPM(QtGui.QMainWindow):
 		self.project.notes[self.note]=text
 		self.project.Save("notes")
 		self.ui.noteSave.setEnabled(False)
+		self.logs.add(self.tr("Note '%s' saved" %self.note))
+
 	@QtCore.pyqtSlot()		
 	def on_noteCreate_clicked(self):
 		name=self.ui.newnote.text()
@@ -229,6 +236,8 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.notetext.clear()
 			self.note=name
 			self.ui.notetext.setDisabled(False)
+			self.logs.add(self.tr("Note '%s' created" %name))
+
 		self.updateStats()
 		self.jobNotesUpdate()
 	@QtCore.pyqtSlot()	
@@ -248,6 +257,8 @@ class LBPM(QtGui.QMainWindow):
 				self.ui.notetext.setDisabled(True)
 				self.updateStats()
 				self.jobNotesUpdate()
+				self.logs.add(self.tr("Note '%s' deleted" %item.text()))
+
 
 	@QtCore.pyqtSlot()			
 	def on_projectCreate_clicked(self):
@@ -259,7 +270,7 @@ class LBPM(QtGui.QMainWindow):
 			self.collection.create_project(name)
 			self.ui.projectslist.addItem(name)
 			self.ui.newProject.clear()
-	
+			self.logs.add(self.tr("Project '%s' created" %name))
 	@QtCore.pyqtSlot()			
 	def on_projectDelete_clicked(self):
 		item=self.ui.projectslist.currentItem()
@@ -280,7 +291,8 @@ class LBPM(QtGui.QMainWindow):
 					
 				self.ui.projectslist.takeItem(n)
 				self.collection.delete_project(unicode(item.text()))
-				
+				self.logs.add(self.tr("Project '%s' deleted" %item.text()))
+
 	@QtCore.pyqtSlot()				
 	def on_docCreate_clicked(self):
 		fd = QtGui.QFileDialog()
@@ -291,6 +303,8 @@ class LBPM(QtGui.QMainWindow):
 		self.project.Save("documents")
 		self.ui.docslist.addItem(file)
 		self.updateStats()
+		self.logs.add(self.tr("Document '%s' added" %file))
+
 
 		return 0
 	@QtCore.pyqtSlot()		
@@ -301,6 +315,8 @@ class LBPM(QtGui.QMainWindow):
 		else:
 			text=self.project.documents[unicode(item.text())]
 			subprocess.Popen(["xdg-open",text])
+			self.logs.add(self.tr("Document '%s' opened" %text))
+
 	@QtCore.pyqtSlot()		
 	def on_docDelete_clicked(self):
 		item=self.ui.docslist.currentItem()
@@ -316,6 +332,8 @@ class LBPM(QtGui.QMainWindow):
 				self.project.Save("documents")
 				self.ui.doctext.clear()
 				self.updateStats()
+				self.logs.add(self.tr("Document '%s' deleted" %item.text()))
+
 
 	@QtCore.pyqtSlot()				
 	def on_linkCreate_clicked(self):
@@ -337,7 +355,8 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.linkUrl.clear()
 			self.ui.linkDesc.clear()
 			self.updateStats()
-			
+			self.logs.add(self.tr("Link created"))
+
 	@QtCore.pyqtSlot()			
 	def on_linkDescGet_clicked(self):
 		name=self.ui.linkUrl.text()
@@ -350,6 +369,7 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.linkDesc.setText(self.tr("Getting title"))
 		self.loader=getHTMLTitle.TitleLoader(name)
 		self.loader.start()
+
 		QtCore.QObject.connect(self.loader,QtCore.SIGNAL("finished()"), self.linkDescGetDone)
 		QtCore.QObject.connect(self.loader.timer, QtCore.SIGNAL("timeout()"), self.linkDescGetProgress)
 
@@ -363,6 +383,8 @@ class LBPM(QtGui.QMainWindow):
 		self.ui.linkUrl.setDisabled(False)
 		self.ui.linkDesc.setDisabled(False)
 		self.ui.linkDescGet.setDisabled(False)
+		self.logs.add(self.tr("Link description dowloaded"))
+
 		
 		
 		
@@ -371,7 +393,8 @@ class LBPM(QtGui.QMainWindow):
 		if not url.startswith("http://") and not url.startswith("https://") and not url.startswith("ftp://"):
 			url="http://"+url
 		subprocess.Popen(["xdg-open",url])
-		
+		self.logs.add(self.tr("Link opened"))
+
 		
 	def on_jobslist_itemActivated(self,e):
 		note= unicode(e.text(3))
@@ -404,6 +427,8 @@ class LBPM(QtGui.QMainWindow):
 				self.ui.linkslist.takeTopLevelItem(n)
 
 				self.project.Save("links")
+				self.logs.add(self.tr("Link deleted"))
+
 		self.updateStats()
 	@QtCore.pyqtSlot()		
 	def on_jobCreate_clicked(self):
@@ -419,7 +444,7 @@ class LBPM(QtGui.QMainWindow):
 		status=unicode(status)
 		content=[date,status,None]
 		if name=="" or name in self.project.jobs:
-			guihelpers.message(self.tr("Error"),self.tr("No job specified or already exists"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task specified or already exists"),True)
 	
 		else:
 			a = QtGui.QTreeWidgetItem(self.ui.jobslist)
@@ -434,15 +459,17 @@ class LBPM(QtGui.QMainWindow):
 			self.ui.jobName.clear()
 			self.updateStats()
 			self.updateJobsStats()
+			self.logs.add(self.tr("Task '%s' created" %name))
+
 	@QtCore.pyqtSlot()	
 	def on_jobDelete_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
-			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete job \"")+item.text(0)+"\" ?")
+			ret=guihelpers.message(self.tr("Warning"),self.tr("Do you really want to delete task \"")+item.text(0)+"\" ?")
 			if ret==0:	
 				del self.project.jobs[unicode(item.text(0))]
 				self.ui.jobslist.takeTopLevelItem(n)
@@ -450,6 +477,7 @@ class LBPM(QtGui.QMainWindow):
 				self.project.Save("jobs")
 				self.updateStats()
 				self.updateJobsStats()
+				self.logs.add(self.tr("Task '%s' deleted" %item.text(0)))
 
 
 	@QtCore.pyqtSlot()				
@@ -458,7 +486,7 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
 			item=self.ui.jobslist.takeTopLevelItem(n)
 			status=self.ui.jobEditStatus.currentText()
@@ -473,13 +501,15 @@ class LBPM(QtGui.QMainWindow):
 			self.project.Save("jobs")
 			self.updateJobsStats()
 			self.loadTodays()
+			self.logs.add(self.tr("Task '%s' edited" %item.text(0)))
+
 	@QtCore.pyqtSlot()	
 	def on_jobAssignNote_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
 			note=unicode(self.ui.jobNotes.currentText())
 			if note==self.tr("None"): note="--"
@@ -493,27 +523,31 @@ class LBPM(QtGui.QMainWindow):
 
 			self.project.Save("jobs")
 			self.loadTodays()
+			self.logs.add(self.tr("Note '%s' assigned to task '%s'" %(note,item.text(0))))
+
 	@QtCore.pyqtSlot()			
 	def on_jobAddToTodays_clicked(self):
 		item=self.ui.jobslist.currentItem()
 		n=self.ui.jobslist.indexOfTopLevelItem(item)
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
 			name=unicode(item.text(0))
 			if self.todays.check_job(name,self.project.name):
-				guihelpers.message(self.tr("Error"),self.tr("Job already on the list"),True)
+				guihelpers.message(self.tr("Error"),self.tr("Task already on the list"),True)
 			else:
 				p=todays.TodaysJob([self.project.name,name])
 				self.todays.jobs.append(p)
 				self.todays.save_jobs()
 				self.loadTodays()
+				self.logs.add(self.tr("Task '%s' added to Todays list" %item.text(0)))
+
 	@QtCore.pyqtSlot()				
 	def on_todaysDelete_clicked(self):
 		item=self.ui.todaysJobsList.currentItem()
 		n=self.ui.todaysJobsList.indexOfTopLevelItem(item)
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
 			project=unicode(item.text(0))
 			name=unicode(item.text(1))
@@ -523,6 +557,8 @@ class LBPM(QtGui.QMainWindow):
 					self.todays.jobs.pop(self.todays.jobs.index(job))
 			self.todays.save_jobs()
 			self.loadTodays()
+			self.logs.add(self.tr("Task '%s' deleted from todays list" %item.text(0)))
+
 	
 	@QtCore.pyqtSlot()	
 	def on_todaysNew_clicked(self):
@@ -539,7 +575,7 @@ class LBPM(QtGui.QMainWindow):
 		n=self.ui.todaysJobsList.indexOfTopLevelItem(item)
 		
 		if item==None:
-			guihelpers.message(self.tr("Error"),self.tr("No job selected"),True)
+			guihelpers.message(self.tr("Error"),self.tr("No task selected"),True)
 		else:
 			item=self.ui.todaysJobsList.takeTopLevelItem(n)
 			status=unicode(status)
@@ -557,4 +593,5 @@ class LBPM(QtGui.QMainWindow):
 			except:
 				pass
 			self.loadTodays()
-			
+			self.logs.add(self.tr("Task '%s' edited" %item.text(0)))
+
